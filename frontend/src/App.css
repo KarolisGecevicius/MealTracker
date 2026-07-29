@@ -14,7 +14,33 @@ h1{
   color:aquamarine;
   background-color: black;
 }
+
 body{
   background-color: darkslategray;
+}
+
+.default-week-day{
+  border: 1px solid black;
+  padding:10px;
+  width:120px;
+}
+
+.pop-up-placement{
+  width:100%;
+  height:100%;
+  backdrop-filter:blur(10px);
+  position:fixed; /*places my pop up where I tell it to be*/
+  top:50%; left: 50%; /*centers my pop up*/
+  z-index:1000; /*sets my pop up to appear above everything else */
+  transform: translate(-50%, -50%); /*since after top and left my left corner now is in the center we move it so that the center is in the center*/
+}
+
+.pop-up{
+  width:30%;
+  height:30%;
+  position:fixed;
+  transform: translate(-50%, -50%);
+  top:50%; left: 50%;
+  background-color: beige;
 }
 

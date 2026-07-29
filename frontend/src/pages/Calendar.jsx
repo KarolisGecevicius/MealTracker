@@ -1,4 +1,5 @@
-import { use, useState } from "react"
+import { useState } from "react"
+import '../App.css'
 
 function Calendar()
 {
@@ -33,18 +34,17 @@ function Calendar()
 
             <div>
                 {date=="This week" && (
-                    <div style={{display: "flex", gap:"10px", marginTop:"20px"}}>
+                    <div style={{display: "flex", gap:"10px", marginTop:"20px", justifyContent:"center"}}>
                         {weekData.map((dayItem) => (
                         <div
                             key={dayItem.day}
-                            onClick={() => setExpandedDay(dayItem.day)}
-                            style = {{border: "1px solid black", padding: "10px"}}
+                            onClick={() => setExpandedDay(dayItem)}
+                            className="default-week-day"
                         >
                         
                         <h3>{dayItem.day}</h3>
                         <p>{dayItem.info}</p>
 
-                        {expandedDay == dayItem.day && <p>Details: {dayItem.details}</p>}
                     </div>
                 ))}
             </div>
@@ -53,7 +53,26 @@ function Calendar()
                 {date=="This month" && <p>Showing data for this month</p>}
                 {date=="This year" && <p>Showing data for this year</p>}
             </div>
-
+             <div>
+                    {expandedDay && (
+                            <div className="pop-up-placement">
+                                <div className="pop-up">
+                                <h3>Day: {expandedDay.day}</h3>
+                                    <p>Info: {expandedDay.info}</p>
+                                    <p>Details:{expandedDay.details}</p>
+                                    <button onClick={(e) =>{
+                                        e.stopPropagation(); //if my close button overlaps with any day of the week
+                                        //this prevents it from activing for example if my Close button is on top 
+                                        //of monday when I click close monday pop up will not open
+                                        //Basically prevents the click from travelling upwards
+                                        setExpandedDay(null);
+                                    }}>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                </div>
             
 
         </div>
