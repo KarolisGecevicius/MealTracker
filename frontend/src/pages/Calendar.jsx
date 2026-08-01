@@ -1,5 +1,6 @@
 import { useState } from "react"
 import '../App.css'
+import PopUp from "../components/Popup";
 
 function Calendar()
 {
@@ -20,6 +21,10 @@ function Calendar()
     ];
     const [expandedDay, setExpandedDay]=useState(null);
 
+    function ClosePopUp()
+    {
+        setExpandedDay(null);
+    }
 
     return (
         <div>
@@ -55,24 +60,12 @@ function Calendar()
             </div>
              <div>
                     {expandedDay && (
-                            <div className="pop-up-placement">
-                                <div className="pop-up">
-                                <h3>Day: {expandedDay.day}</h3>
-                                    <p>Info: {expandedDay.info}</p>
-                                    <p>Details:{expandedDay.details}</p>
-                                    <button onClick={(e) =>{
-                                        e.stopPropagation(); //if my close button overlaps with any day of the week
-                                        //this prevents it from activing for example if my Close button is on top 
-                                        //of monday when I click close monday pop up will not open
-                                        //Basically prevents the click from travelling upwards
-                                        setExpandedDay(null);
-                                    }}>
-                                        Close
-                                    </button>
-                                </div>
-                            </div>
-                        )}
-                </div>
+                        <PopUp 
+                            selectedDay={expandedDay}
+                            OnClose={ClosePopUp}
+                        />
+                    )}
+            </div>
             
 
         </div>
