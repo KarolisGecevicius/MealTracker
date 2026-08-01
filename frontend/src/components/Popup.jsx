@@ -1,6 +1,6 @@
 import './Popup.css'
 
-function PopUp({selectedDay, OnClose})
+function PopUp({selectedDay, onClose})
 {
     return(
         <div className="pop-up-placement">
@@ -13,7 +13,7 @@ function PopUp({selectedDay, OnClose})
                     //this prevents it from activing for example if my Close button is on top 
                     //of monday when I click close monday pop up will not open
                     //Basically prevents the click from travelling upwards
-                    OnClose();
+                    onClose();
                 }}>
                     Close
                 </button>
