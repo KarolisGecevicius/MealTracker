@@ -1,6 +1,5 @@
 .nav-link{
   padding: 10px;
-  
   color:aquamarine;
 }
 
@@ -22,7 +21,7 @@ body{
 .default-week-day{
   border: 1px solid black;
   padding:10px;
-  width:120px;
+  background-color:rgb(44, 131, 169);
 }
 
 .calendar-overlay{
@@ -56,5 +55,24 @@ body{
 .days-of-the-week{
   background-color:rgb(96, 180, 217);
   text-align: center;
+}
 
+.default-year-day{
+  margin-top: 10px;
+  border: 1px solid black;
+  background-color:rgb(44, 131, 169);
+  padding-left: 10%;
+}
+
+.year-view{
+  display: grid;
+  gap:10px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.week-view{
+  display: grid; 
+  gap:10px;
+  margin-top:20px;
+  grid-template-columns: repeat(7, 1fr);
 }

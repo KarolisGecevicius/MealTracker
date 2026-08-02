@@ -5,7 +5,7 @@ function PopUp({selectedDay, onClose})
     return(
         <div className="pop-up-placement">
             <div className="pop-up">
-            <h3>Day: {selectedDay.day}</h3>
+            <h3>{selectedDay.title}</h3>
                 <p>Info: {selectedDay.info}</p>
                 <p>Details:{selectedDay.details}</p>
                 <button onClick={(e) =>{

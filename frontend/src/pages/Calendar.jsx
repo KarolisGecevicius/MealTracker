@@ -11,14 +11,15 @@ function Calendar()
     }
 
     const weekData =[
-        {day:"Monday", info:"calories", details:"What you ate that day"},
-        {day:"Tuesday", info:"calories", details:"What you ate that day"},
-        {day:"Wednesday", info:"calories", details:"What you ate that day"},
-        {day:"Thursday", info:"calories", details:"What you ate that day"},
-        {day:"Friday", info:"calories", details:"What you ate that day"},
-        {day:"Saturday", info:"calories", details:"What you ate that day"},
-        {day:"Sunday", info:"calories", details:"What you ate that day"},
+        {title:"Monday", info:"calories", details:"What you ate that day"},
+        {title:"Tuesday", info:"calories", details:"What you ate that day"},
+        {title:"Wednesday", info:"calories", details:"What you ate that day"},
+        {title:"Thursday", info:"calories", details:"What you ate that day"},
+        {title:"Friday", info:"calories", details:"What you ate that day"},
+        {title:"Saturday", info:"calories", details:"What you ate that day"},
+        {title:"Sunday", info:"calories", details:"What you ate that day"},
     ];
+
 
     const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     
@@ -35,9 +36,20 @@ function Calendar()
     for(let i=0; i<days; i++)
     {
         monthData.push({
-            day:i+1, 
+            title:i+1, 
             info:"calories",
             details:"What you ate at this day of the month",
+        });
+    }
+
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    const yearData = []
+    for(let i=0; i<12; i++)
+    {
+        yearData.push({
+            title: months[i],
+            info:"calories",
+            details:"Details about this month",
         });
     }
     
@@ -62,15 +74,15 @@ function Calendar()
 
             <div>
                 {date=="This week" && (
-                    <div style={{display: "flex", gap:"10px", marginTop:"20px", justifyContent:"center"}}>
+                    <div className="week-view">
                         {weekData.map((dayItem) => (
                         <div
-                            key={dayItem.day}
+                            key={dayItem.title}
                             onClick={() => setExpandedDay(dayItem)}
                             className="default-week-day"
                         >
                         
-                        <h3>{dayItem.day}</h3>
+                        <h3>{dayItem.title}</h3>
                         <p>{dayItem.info}</p>
 
                     </div>
@@ -97,17 +109,30 @@ function Calendar()
                                 {monthData.map((monthItem) => (
                                     <div 
                                         className="default-month-day"
-                                        key={monthItem.day}
+                                        key={monthItem.title}
                                         onClick={()=>setExpandedDay(monthItem)}
                                     >
-                                    <h3>{monthItem.day}</h3>
+                                    <h3>{monthItem.title}</h3>
                                     <p>{monthItem.info}</p>               
                             </div>
                         ))}
                         </div>
                     </div>
                 )}
-                {date=="This year" && <p>Showing data for this year</p>}
+                {date=="This year" && (
+                    <div className="year-view">
+                        {yearData.map((yearItem) => (
+                            <div
+                                className="default-year-day"
+                                key={yearItem.title}
+                                onClick={()=>setExpandedDay(yearItem)}
+                            >
+                            <h3>{yearItem.title}</h3>
+                            <p>{yearItem.info}</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
 
              
                 {expandedDay && (
