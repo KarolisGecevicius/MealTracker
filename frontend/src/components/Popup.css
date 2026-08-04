@@ -16,3 +16,18 @@
   top:50%; left: 50%;
   background-color: beige;
 }
+
+.home-pop-up{
+  width:40%;
+  height:40%;
+  position:fixed;
+  transform: translate(-50%, -50%);
+  top:50%; left: 50%;
+  background-color: beige;
+  display: list-item;
+}
+
+label{
+  display: block;
+  margin-bottom: 5px;
+}
