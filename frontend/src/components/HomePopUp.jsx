@@ -10,8 +10,18 @@ function HomePopUp({onClose})
                     <input />
                 </div>
                 <div>
+                    <label>Meal type:</label>
+                    <select defaultValue={"bullshit"}>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                    </select>
+                </div>
+                <div>
                     <label>Select Meal: </label>
-                    <input/>
+                    <select>
+
+                    </select>
                 </div>
                 <div>
                     <label>Create new Meal:</label>

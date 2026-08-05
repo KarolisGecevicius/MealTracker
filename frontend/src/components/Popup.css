@@ -20,6 +20,7 @@
 .home-pop-up{
   width:40%;
   height:40%;
+  padding:20px;
   position:fixed;
   transform: translate(-50%, -50%);
   top:50%; left: 50%;
