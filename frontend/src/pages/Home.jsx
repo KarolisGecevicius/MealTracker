@@ -5,26 +5,10 @@ import HomePopUp from "../components/HomePopup";
 function Home()
 {
     const mealData = [
-        {
-            name: "Chicken",
-            type: "Lunch",
-            calories: "500"
-        },
-        {
-            name: "Yogurt",
-            type: "Breakfast",
-            calories: "200"
-        },
-        {
-            name: "Fruits",
-            type: "Dinner",
-            calories: "400"
-        },
-        {
-            name: "Eggs",
-            type: "Breakfast",
-            calories: "300"
-        }
+        { name: "Chicken", type: "Lunch", calories: "500" },
+        { name: "Yogurt", type: "Breakfast", calories: "200" },
+        { name: "Fruits", type: "Dinner", calories: "400" },
+        { name: "Eggs", type: "Breakfast", calories: "300" }
     ];
 
     const breakfastMeals =[];
@@ -54,23 +38,24 @@ function Home()
     }
 
     return (
-        <div>
+        <div className="home-page">
             <h1> Home</h1>
             <p> Welcome</p>
-            <button onClick={() => setExpandedHomePopUp(true)}>
-                Add Meal
+            <button className= "add-meal-button" onClick={() => setExpandedHomePopUp(true)}>
+                +Add Meal
             </button>
 
-            <div>
+            <div className="meals-container">
                 <h2>Breakfast</h2>
-                <div>
+                <div className="meal-list">
                     {breakfastMeals.map((breakFastItem,index) => (
                     <div
-                    key={index}
+                        key={index}
+                        className="meal-card"
                     >
                         <h3>{breakFastItem.name}</h3>
-                        <p>{breakFastItem.type}</p>
-                        <p>{breakFastItem.calories}</p>
+                        <p className="meal-type">{breakFastItem.type}</p>
+                        <p className="meal-calories">{breakFastItem.calories}</p>
                     </div>
                     ))}
                 </div>
@@ -78,11 +63,12 @@ function Home()
                 <div>
                     {lunchMeals.map((lunchItem,index) => (
                     <div
-                    key={index}
+                        key={index}
+                        className="meal-card"
                     >
                         <h3>{lunchItem.name}</h3>
-                        <p>{lunchItem.type}</p>
-                        <p>{lunchItem.calories}</p>
+                        <p className="meal-type">{lunchItem.type}</p>
+                        <p className="meal-calories">{lunchItem.calories}</p>
                     </div>
                     ))}
                 </div>
@@ -90,11 +76,12 @@ function Home()
                 <div>
                     {dinnerMeals.map((dinnerItem,index) => (
                     <div
-                    key={index}
+                        key={index}
+                        className="meal-card"
                     >
                         <h3>{dinnerItem.name}</h3>
-                        <p>{dinnerItem.type}</p>
-                        <p>{dinnerItem.calories}</p>
+                        <p className="meal-type">{dinnerItem.type}</p>
+                        <p className="meal-calories">{dinnerItem.calories}</p>
                     </div>
                     ))}
                 </div>
