@@ -5,10 +5,10 @@ import HomePopUp from "../components/HomePopup";
 function Home()
 {
     const mealData = [
-        { name: "Chicken", type: "Lunch", calories: "500" },
-        { name: "Yogurt", type: "Breakfast", calories: "200" },
-        { name: "Fruits", type: "Dinner", calories: "400" },
-        { name: "Eggs", type: "Breakfast", calories: "300" }
+        { name: "Chicken", type: "Lunch", calories: "500", grams:"200" },
+        { name: "Yogurt", type: "Breakfast", calories: "200", grams:"300"},
+        { name: "Fruits", type: "Dinner", calories: "400", grams:"500" },
+        { name: "Eggs", type: "Breakfast", calories: "300", grams:"200" }
     ];
 
     const breakfastMeals =[];
@@ -55,7 +55,8 @@ function Home()
                     >
                         <h3>{breakFastItem.name}</h3>
                         <p className="meal-type">{breakFastItem.type}</p>
-                        <p className="meal-calories">{breakFastItem.calories}</p>
+                        <p className="meal-calories">Calories: {breakFastItem.calories}</p>
+                        <p className="meal-grams">Grams: {breakFastItem.grams}</p>
                     </div>
                     ))}
                 </div>
@@ -68,7 +69,8 @@ function Home()
                     >
                         <h3>{lunchItem.name}</h3>
                         <p className="meal-type">{lunchItem.type}</p>
-                        <p className="meal-calories">{lunchItem.calories}</p>
+                        <p className="meal-calories">Calories: {lunchItem.calories}</p>
+                        <p className="meal-grams">Grams: {lunchItem.grams}</p>
                     </div>
                     ))}
                 </div>
@@ -81,7 +83,8 @@ function Home()
                     >
                         <h3>{dinnerItem.name}</h3>
                         <p className="meal-type">{dinnerItem.type}</p>
-                        <p className="meal-calories">{dinnerItem.calories}</p>
+                        <p className="meal-calories">Calories: {dinnerItem.calories}</p>
+                        <p className="meal-grams">Grams: {dinnerItem.grams}</p>
                     </div>
                     ))}
                 </div>
