@@ -19,7 +19,7 @@
 
 .home-pop-up{
   width:40%;
-  height:40%;
+  height:60%;
   padding:20px;
   position:fixed;
   transform: translate(-50%, -50%);
@@ -31,4 +31,14 @@
 label{
   display: block;
   margin-bottom: 5px;
+}
+
+.food-selection{
+  position: fixed;
+  width: 50%;
+  max-height: 100px;
+  overflow-y: auto;
+  background: white;
+  z-index: 10;
+  right: 25%;
 }
