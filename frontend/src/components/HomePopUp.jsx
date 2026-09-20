@@ -29,7 +29,7 @@ function HomePopUp({onClose})
                     <input
                         type="text"
                         placeholder='Search'
-                        value={search}
+                        value={selectedFood ? selectedFood.name : search}
                         onFocus={() => setShowOptions(true)}
                         onChange={(e) => {
                             setSearch(e.target.value);
@@ -69,19 +69,19 @@ function HomePopUp({onClose})
                 </div>
                 <div>
                     <label>Calories:</label>
-                    <input />
+                    <input value = {selectedFood ? selectedFood.calories : ""}/>
                 </div>
                 <div>
                     <label>Carbs:</label>
-                    <input />
+                    <input value = {selectedFood ? selectedFood.carbs : ""}/>
                 </div>
                 <div>
                     <label>Protein:</label>
-                    <input />
+                    <input value = {selectedFood ? selectedFood.protein : ""}/>
                 </div>
                 <div>
                     <label>Fat:</label>
-                    <input />
+                    <input value = {selectedFood ? selectedFood.fat : ""}/>
                 </div>
                 <div>
                     <button>
