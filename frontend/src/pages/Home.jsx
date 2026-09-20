@@ -1,5 +1,5 @@
 import { useState } from "react"
-import HomePopUp from "../components/HomePopup";
+import HomePopUp from "../components/HomePopUp";
 
 
 function Home()
