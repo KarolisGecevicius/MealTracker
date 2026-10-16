@@ -10,6 +10,7 @@ function HomePopUp({onClose})
     const [selectedFood, setSelectedFood] = useState(null);
     const [amountGrams, setAmountGrams] = useState(100);
     const [manualChange, setManualChange] = useState(false);
+    const formatter = (n) => parseFloat(n.toFixed(4))
 
     useEffect(() => {
     fetch("http://localhost:8080/foods")
@@ -52,6 +53,7 @@ function HomePopUp({onClose})
                                         setSelectedFood(food)
                                         setSearch("")
                                         setShowOptions(false)
+                                        setAmountGrams(100)
                                     }}
                                 >
                                     {food.name}
@@ -86,12 +88,14 @@ function HomePopUp({onClose})
                     <label>Calories:</label>
                     <input 
                         type = "number"
-                        value = {selectedFood ? selectedFood.calories*(amountGrams/100) :  "" }
+                        value = {selectedFood ? formatter(selectedFood.calories*(amountGrams/100)) :  "" }
+                        
                         onBlur={(e) => {
-                            setSelectedFood({...selectedFood, calories:e.target.value})
+                            const num = Number(e.target.value*(amountGrams/100))
+                            setSelectedFood({...selectedFood, calories:num})
                         }}
                         onChange={(e)=>{
-                            const num = e.target.value
+                            const num = Number(e.target.value*(amountGrams/100))
                             setSelectedFood({...selectedFood, calories: num})
                             setManualChange(true)
                         }}
@@ -102,7 +106,7 @@ function HomePopUp({onClose})
                     <label>Carbs:</label>
                     <input 
                         type = "number"
-                        value = {selectedFood ?  selectedFood.carbs*(amountGrams/100) : ""}
+                        value = {selectedFood ?  formatter(selectedFood.carbs*(amountGrams/100)) : ""}
                         onBlur={(e) => {
                             setSelectedFood({...selectedFood, carbs: e.target.value})
                         }}
@@ -117,7 +121,7 @@ function HomePopUp({onClose})
                     <label>Protein:</label>
                     <input 
                         type = "number"
-                        value = {selectedFood ? selectedFood.protein*(amountGrams/100) : ""}
+                        value = {selectedFood ? formatter(selectedFood.protein*(amountGrams/100)) : ""}
                         onBlur={(e) => {
                             setSelectedFood({...selectedFood, protein: e.target.value})
                         }}
@@ -132,7 +136,7 @@ function HomePopUp({onClose})
                     <label>Fat:</label>
                     <input 
                         type = "number"
-                        value = {selectedFood ? selectedFood.fat*(amountGrams/100):  ""}
+                        value = {selectedFood ? formatter(selectedFood.fat*(amountGrams/100)):  ""}
                         onBlur={(e) => {
                             setSelectedFood({...selectedFood, fat: e.target.value})
                         }}
