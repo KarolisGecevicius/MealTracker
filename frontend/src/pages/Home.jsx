@@ -9,6 +9,7 @@ function Home()
     const breakfastMeals =[];
     const lunchMeals =[];
     const dinnerMeals =[];
+    const formatter = (n) => parseFloat(n.toFixed(4))
 
      function closeHomePopUp()
     {
@@ -57,13 +58,13 @@ function Home()
                     >
                         <h3>{breakFastItem.name}</h3>
                         <p className="meal-type">{breakFastItem.type}</p>
-                        <p className="meal-calories">Calories: {breakFastItem.calories}</p>
+                        <p className="meal-calories">Calories: {formatter(breakFastItem.calories*(breakFastItem.grams/100))}</p>
                         <p className="meal-grams">Grams: {breakFastItem.grams}</p>
                     </div>
                     ))}
                 </div>
                 <h2>Lunch</h2>
-                <div>
+                <div className="meal-list">
                     {lunchMeals.map((lunchItem,index) => (
                     <div
                         key={index}
@@ -77,7 +78,7 @@ function Home()
                     ))}
                 </div>
                 <h2>Dinner</h2>
-                <div>
+                <div className="meal-list">
                     {dinnerMeals.map((dinnerItem,index) => (
                     <div
                         key={index}
