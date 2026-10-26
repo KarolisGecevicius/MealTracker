@@ -4,38 +4,40 @@ import HomePopUp from "../components/HomePopUp";
 
 function Home()
 {
-    const mealData = [
-        { name: "Chicken", type: "Lunch", calories: "500", grams:"200" },
-        { name: "Yogurt", type: "Breakfast", calories: "200", grams:"300"},
-        { name: "Fruits", type: "Dinner", calories: "400", grams:"500" },
-        { name: "Eggs", type: "Breakfast", calories: "300", grams:"200" }
-    ];
-
+    const[mealData, addMeals] = useState([]);
+    const [expandedHomePopUp, setExpandedHomePopUp]=useState(false);    
     const breakfastMeals =[];
     const lunchMeals =[];
     const dinnerMeals =[];
 
+     function closeHomePopUp()
+    {
+        setExpandedHomePopUp(false)
+    }
+
+    function MealAdder(meal)
+    {
+        addMeals([...mealData, meal])
+    }
+    
 
     for(let i=0; i<mealData.length; i++)
     {
-        if(mealData.at(i).type=="Breakfast")
+        console.log(mealData.at(i).time)
+        if(mealData.at(i).time=="Breakfast")
         {
             breakfastMeals.push(mealData.at(i))
         }
-        if(mealData.at(i).type=="Lunch")
+        if(mealData.at(i).time=="Lunch")
         {
             lunchMeals.push(mealData.at(i))
         }
-        if(mealData.at(i).type=="Dinner")
+        if(mealData.at(i).time=="Dinner")
         {
             dinnerMeals.push(mealData.at(i))
         }
     }
-    const [expandedHomePopUp, setExpandedHomePopUp]=useState(false);
-    function closeHomePopUp()
-    {
-        setExpandedHomePopUp(false)
-    }
+   
 
     return (
         <div className="home-page">
@@ -93,6 +95,7 @@ function Home()
 
             {expandedHomePopUp && (
                 <HomePopUp
+                    mealAdd={MealAdder}
                     onClose={closeHomePopUp}
                 />
             )}

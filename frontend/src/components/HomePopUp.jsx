@@ -2,7 +2,7 @@ import './Popup.css'
 import { useEffect, useState } from 'react';
 
 
-function HomePopUp({onClose})
+function HomePopUp({onClose, mealAdd})
 {
     const [foods, setFoods] = useState([]);
     const [search, setSearch] = useState("");
@@ -10,6 +10,7 @@ function HomePopUp({onClose})
     const [selectedFood, setSelectedFood] = useState(null);
     const [amountGrams, setAmountGrams] = useState(100);
     const [manualChange, setManualChange] = useState(false);
+    const [mealTime, setMealType] = useState("Breakfast");
     const formatter = (n) => parseFloat(n.toFixed(4))
 
     useEffect(() => {
@@ -34,6 +35,11 @@ function HomePopUp({onClose})
                         placeholder='Search'
                         value={selectedFood ? selectedFood.name : search}
                         onFocus={() => setShowOptions(true)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Escape"){
+                                setShowOptions(false)
+                            }
+                        }}
                         onChange={(e) => {
                             setSearch(e.target.value);
                             setSelectedFood(null)
@@ -65,7 +71,7 @@ function HomePopUp({onClose})
                 </div>
                 <div>
                     <label>Meal type:</label>
-                    <select>
+                    <select value = {mealTime} onChange={(e) => setMealType(e.target.value)}>
                         <option value="Breakfast">Breakfast</option>
                         <option value="Lunch">Lunch</option>
                         <option value="Dinner">Dinner</option>
@@ -148,7 +154,12 @@ function HomePopUp({onClose})
                     />
                 </div>
                 <div>
-                    <button>
+                    <button onClick={(e) => {
+                        const merged = {...selectedFood, grams: amountGrams, time: mealTime}
+                        mealAdd(merged);
+                        e.stopPropagation();
+                        onClose();
+                    }}>
                         Save
                     </button>
                     <button onClick={(e)=>{
