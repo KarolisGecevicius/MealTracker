@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import HomePopUp from "../components/HomePopUp";
 
 
 function Home()
-{
+{    
     const[mealData, addMeals] = useState([]);
     const [expandedHomePopUp, setExpandedHomePopUp]=useState(false);    
     const breakfastMeals =[];
@@ -11,7 +11,7 @@ function Home()
     const dinnerMeals =[];
     const formatter = (n) => parseFloat(n.toFixed(4))
 
-     function closeHomePopUp()
+    function closeHomePopUp()
     {
         setExpandedHomePopUp(false)
     }
@@ -20,12 +20,39 @@ function Home()
     {
         addMeals([...mealData, meal])
     }
+
+    function msToMidNight()
+    {
+        const midNight = new Date().setHours(24,0,0,0)
+        const currentTime = new Date()
+        const mstomid = midNight-currentTime
+
+        return mstomid
+    }
+
+
+    useEffect(() =>{
+        let timeout;
+
+        function scheduleMidNightReset()
+        {
+            timeout = setTimeout(() => {
+            addMeals([])
+
+            scheduleMidNightReset()
+            }, msToMidNight());
+        }
+        
+        scheduleMidNightReset();
+
+        return () => clearTimeout(timeout)
+
+    }, [])
     
 
     for(let i=0; i<mealData.length; i++)
     {
-        console.log(mealData.at(i).time)
-        if(mealData.at(i).time=="Breakfast")
+        if(mealData.at(i).time == "Breakfast")
         {
             breakfastMeals.push(mealData.at(i))
         }
@@ -33,7 +60,7 @@ function Home()
         {
             lunchMeals.push(mealData.at(i))
         }
-        if(mealData.at(i).time=="Dinner")
+        if(mealData.at(i).time == "Dinner")
         {
             dinnerMeals.push(mealData.at(i))
         }
@@ -49,6 +76,8 @@ function Home()
             </button>
 
             <div className="meals-container">
+            {Object.keys(breakfastMeals).length>0 && (
+                <>
                 <h2>Breakfast</h2>
                 <div className="meal-list">
                     {breakfastMeals.map((breakFastItem,index) => (
@@ -63,8 +92,13 @@ function Home()
                     </div>
                     ))}
                 </div>
-                <h2>Lunch</h2>
-                <div className="meal-list">
+                </>
+            )}
+            
+            {Object.keys(lunchMeals).length>0 && (
+                <>
+                    <h2>Lunch</h2>
+                    <div className="meal-list">
                     {lunchMeals.map((lunchItem,index) => (
                     <div
                         key={index}
@@ -77,8 +111,12 @@ function Home()
                     </div>
                     ))}
                 </div>
-                <h2>Dinner</h2>
-                <div className="meal-list">
+                </>
+            )}
+            {Object.keys(dinnerMeals).length>0 && (
+                <>
+                    <h2>Dinner</h2>
+                    <div className="meal-list">
                     {dinnerMeals.map((dinnerItem,index) => (
                     <div
                         key={index}
@@ -91,6 +129,9 @@ function Home()
                     </div>
                     ))}
                 </div>
+                </>
+            )}
+                
             </div>
 
 
