@@ -4,7 +4,12 @@ import HomePopUp from "../components/HomePopUp";
 
 function Home()
 {    
-    const[mealData, addMeals] = useState([]);
+    const [resetDay, updateResetDay] = useState(localStorage.getItem('LastResetDay') || new Date().toLocaleDateString()); // use localstorage data if it exists else use the current day
+    useEffect(()=> localStorage.setItem('LastResetDay', resetDay),[resetDay]) //executes when mounted or when reset day changes
+
+    const[mealData, addMeals] = useState(JSON.parse(localStorage.getItem('MealData') || "[]")) //JSON.parse to return it back to object
+    useEffect(() => localStorage.setItem('MealData', JSON.stringify(mealData)), [mealData]) //JSON.stringify because local storage does not store objects
+
     const [expandedHomePopUp, setExpandedHomePopUp]=useState(false);    
     const breakfastMeals =[];
     const lunchMeals =[];
@@ -21,33 +26,47 @@ function Home()
         addMeals([...mealData, meal])
     }
 
-    function msToMidNight()
+    useEffect(()=>{ // handles reset if app is closed
+    if(resetDay!=new Date().toLocaleDateString())
+    {
+        addMeals([])
+        let newDate = new Date().toLocaleDateString()
+        updateResetDay(newDate)
+    }
+    },[resetDay])
+    
+    function msToMidNight() /// count ms to midnight 
     {
         const midNight = new Date().setHours(24,0,0,0)
         const currentTime = new Date()
         const mstomid = midNight-currentTime
 
-        return mstomid
+        return mstomid;
     }
 
-
-    useEffect(() =>{
+    useEffect(() =>{ //handles reset when home page is mounted
         let timeout;
 
         function scheduleMidNightReset()
         {
-            timeout = setTimeout(() => {
-            addMeals([])
+            timeout = setTimeout(() => { 
 
-            scheduleMidNightReset()
-            }, msToMidNight());
+            let newDate = new Date().toLocaleDateString()
+
+            if(resetDay!=newDate)
+            {
+                addMeals([])
+                updateResetDay(newDate)
+            }
+
+            }, msToMidNight()); //calculate the delay
         }
         
-        scheduleMidNightReset();
+        scheduleMidNightReset(); // start the scheduling
 
-        return () => clearTimeout(timeout)
+        return () => clearTimeout(timeout) //cancels the current event if unmounted
 
-    }, [])
+    }, [resetDay])  
     
 
     for(let i=0; i<mealData.length; i++)
