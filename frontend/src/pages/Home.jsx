@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import HomePopUp from "../components/HomePopUp";
-
+import {Trash2} from 'lucide-react'
 
 function Home()
 {    
@@ -26,6 +26,16 @@ function Home()
         addMeals([...mealData, meal])
     }
 
+
+    function msToMidNight() /// count ms to midnight 
+    {
+        const midNight = new Date().setHours(24,0,0,0)
+        const currentTime = new Date()
+        const mstomid = midNight-currentTime
+
+        return mstomid;
+    }
+
     useEffect(()=>{ // handles reset if app is closed
     if(resetDay!=new Date().toLocaleDateString())
     {
@@ -35,14 +45,6 @@ function Home()
     }
     },[resetDay])
     
-    function msToMidNight() /// count ms to midnight 
-    {
-        const midNight = new Date().setHours(24,0,0,0)
-        const currentTime = new Date()
-        const mstomid = midNight-currentTime
-
-        return mstomid;
-    }
 
     useEffect(() =>{ //handles reset when home page is mounted
         let timeout;
@@ -127,6 +129,12 @@ function Home()
                         <p className="meal-type">{lunchItem.type}</p>
                         <p className="meal-calories">Calories: {lunchItem.calories}</p>
                         <p className="meal-grams">Grams: {lunchItem.grams}</p>
+                        <Trash2
+                            style = {{cursor:"pointer"}}
+                            onClick={(e) => {
+                                lunchMeals.filter
+                            }} 
+                        />
                     </div>
                     ))}
                 </div>

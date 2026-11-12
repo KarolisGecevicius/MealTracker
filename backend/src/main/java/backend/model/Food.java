@@ -1,6 +1,8 @@
 package backend.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -9,25 +11,17 @@ import jakarta.persistence.Table;
 public class Food 
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //automatically generates id
     private int id;
-
     private String name;
     private double calories;
     private double carbs;
     private double fat;
     private double protein;
-    public Food(){
 
-    }
-
-    public int getId()
+    public Food()
     {
-        return id;
-    }
 
-    public void setId(int id)
-    {
-        this.id=id;
     }
 
     public String getName()

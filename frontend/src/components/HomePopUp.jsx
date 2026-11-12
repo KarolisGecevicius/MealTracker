@@ -23,7 +23,7 @@ function HomePopUp({onClose, mealAdd})
         .catch(error => {
             console.error("Error fetching foods:", error);
         });
-}, []);
+    }, []);
 
     return(
         <div className="pop-up-placement">
