@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="userMeals")
+@Table(name="user_meals")
 public class UserFood 
 {
     @Id
@@ -31,12 +31,17 @@ public class UserFood
 
     }
 
-    public int getUserID()
+    public int getId()
+    {
+        return id;
+    }
+
+    public int getUserId()
     {
         return userId;
     }
 
-    public void setUserID(int userId)
+    public void setUserId(int userId)
     {
         this.userId=userId;
     }
