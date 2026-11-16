@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/foods")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173") // allows backend to communicate with the browser
 public class FoodController {
     private final FoodRepo foodrepo;
 
@@ -21,10 +21,10 @@ public class FoodController {
         this.foodrepo=foodrepo;
     }
 
-    @GetMapping
+    @
+    GetMapping
     public List<Food> getFoods()
     {
         return foodrepo.findAll();
     }
-    
 }
