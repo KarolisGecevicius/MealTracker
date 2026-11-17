@@ -21,30 +21,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController 
 @RequestMapping("/userMeals")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173") // allows react app at port 5173 to call this class
 public class UserFoodController {
-    private final UserFoodService service;
+    private final UserFoodService service; // final doesnt allow swapping
 
     public UserFoodController(UserFoodService service)
     {
         this.service=service;
     }
 
-    @GetMapping
-    public List<UserFood> getTodaysUserFood(@RequestParam int userId, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date)
+    @GetMapping // this method answers GET
+    public List<UserFood> getTodaysUserFood(@RequestParam int userId , @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date)
+    //@RequestParam means take id from the url after ?, same for date
+    //DateTimeFormat says the format the date is written in so spring knows how to read it
     {
         return service.getMealsForDay(userId, date);
     }
     
 
-    @PostMapping //spring knows this answers to post /usermeals
-    public UserFood addUserFood(@RequestBody UserFood food) //@reguestbody so that spring converts the json react sends
+    @PostMapping //this method answers POST
+    public UserFood addUserFood(@RequestBody UserFood food) 
+    //@reguestbody mean the data is in the body of the request converts json into userfood
     {
         return service.addMeal(food);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // this method answers DELELTE
     public void deleteUserFood(@PathVariable int id, @RequestParam int userId )
+    //Pathvariable takes the number from the URL path
     {
         service.deleteMeal(id, userId);
     }

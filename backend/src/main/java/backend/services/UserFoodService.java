@@ -15,6 +15,7 @@ public class UserFoodService
 {
     private final UserFoodRepo userFoodRepo;
 
+    //repository is needed to reach the database
     public UserFoodService(UserFoodRepo userFoodRepo) 
     {
         this.userFoodRepo = userFoodRepo;
@@ -25,14 +26,14 @@ public class UserFoodService
         return userFoodRepo.findByUserIdAndDate(userId, date);
     }
 
-    @Transactional 
+    @Transactional // runs the method as a whole unit if smth fails undo everything
     public UserFood addMeal(UserFood meal)
     {
-        if(meal.getQuantity() <= 0)
+        if(meal.getQuantity() <= 0) // checks if quantity is not 0
         {
             throw new IllegalArgumentException("Quantity must be positive");
         }
-        if(meal.getDate()==null)
+        if(meal.getDate()==null) //check if a date is sent
         {
             meal.setDate(LocalDate.now());
         }
@@ -43,7 +44,7 @@ public class UserFoodService
     public void deleteMeal(int id, int userId)
     {
         UserFood meal = userFoodRepo.findById(id).orElseThrow(() -> new RuntimeException("Meal not found"));
-        if(meal.getUserId()!=userId)
+        if(meal.getUserId()!=userId) // check if the meal belongs to the correct user
         {
             throw new RuntimeException("Wrong meal");
         }
