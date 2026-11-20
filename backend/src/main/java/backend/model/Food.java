@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity // the shape of the data mirrors the database table
 @Table(name="meal_nutrition")
 public class Food 
 {

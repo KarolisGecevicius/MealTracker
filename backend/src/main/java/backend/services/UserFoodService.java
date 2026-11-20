@@ -10,7 +10,7 @@ import backend.repository.UserFoodRepo;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@Service 
+@Service // validations checks and calculations, uses repository to read and write data
 public class UserFoodService
 {
     private final UserFoodRepo userFoodRepo;

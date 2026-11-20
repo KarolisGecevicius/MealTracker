@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+// controllers is the connection to the frontend, defines the urls, receives http requests
+// passess the data to the service and returns as an http response
+// only the controller is responsible for commmunication with the frontend
 @RestController
 @RequestMapping("/foods")
 @CrossOrigin(origins = "http://localhost:5173") // allows backend to communicate with the browser
