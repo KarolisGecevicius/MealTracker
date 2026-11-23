@@ -48,4 +48,5 @@ public class UserService
         user.setHashPassword(passwordEncoder.encode(user.getHashPassword()));
         return userRepo.save(user);
     }
+
 }
