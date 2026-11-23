@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController 
 @RequestMapping("/userMeals")
-@CrossOrigin(origins = "http://localhost:5173") // allows react app at port 5173 to call this class
 public class UserFoodController {
     private final UserFoodService service; // final doesnt allow swapping
 

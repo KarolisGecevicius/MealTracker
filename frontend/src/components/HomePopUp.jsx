@@ -14,10 +14,11 @@ function HomePopUp({onClose, mealAdd})
     const formatter = (n) => parseFloat(n.toFixed(4))
 
     useEffect(() => {
-    fetch("http://localhost:8080/foods")
+    fetch("http://localhost:8080/foods", {
+        credentials: "include" // enables browser to send cookies on a cross origin request
+    })
         .then(response => response.json())
         .then(data => {
-            console.log("Foods received:", data);
             setFoods(data);
         })
         .catch(error => {

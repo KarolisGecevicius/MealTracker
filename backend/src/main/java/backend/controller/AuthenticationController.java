@@ -11,7 +11,6 @@ import backend.services.AuthenticationService;
 
 @RestController 
 @RequestMapping("/auth")
-@CrossOrigin(origins="http://localhost:5173")
 public class AuthenticationController      
 {
     private final AuthenticationService service;

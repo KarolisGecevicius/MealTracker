@@ -15,7 +15,6 @@ import java.util.List;
 // only the controller is responsible for commmunication with the frontend
 @RestController
 @RequestMapping("/foods")
-@CrossOrigin(origins = "http://localhost:5173") // allows backend to communicate with the browser
 public class FoodController {
     private final FoodRepo foodrepo;
 
