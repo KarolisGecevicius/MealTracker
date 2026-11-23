@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration // notifies that this class contains setup instruction and tells 
@@ -33,6 +32,7 @@ public class SecurityConfig
                 .configurationSource(corsConfigurationSource()) // tells cors to get rules from 
                 //the corsConfigurationSource method
             )
+            .csrf(csrf -> csrf.disable()) // temporary for login to get working REMOVE LATER!!!
             .authorizeHttpRequests(auth -> auth // define which http requests users are allowed to access
                 .requestMatchers("/auth/login", "/register").permitAll() // allows everyone to access this endpoint
                 .anyRequest().authenticated() // for any other endpoints user is required to be authenticated
