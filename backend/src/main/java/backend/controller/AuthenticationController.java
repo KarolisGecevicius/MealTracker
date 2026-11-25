@@ -46,5 +46,4 @@ public class AuthenticationController
         // browsewr a cookie which is used to recognize the user
         return authenticatedUser;
     }
-
 }

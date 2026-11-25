@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import backend.services.UserFoodService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.security.core.Authentication;
 
 @RestController 
 @RequestMapping("/userMeals")
@@ -29,26 +29,30 @@ public class UserFoodController {
     }
 
     @GetMapping // this method answers GET
-    public List<UserFood> getTodaysUserFood(@RequestParam int userId , @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date)
-    //@RequestParam means take id from the url after ?, same for date
+    public List<UserFood> getTodaysUserFood(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, Authentication authentication)
+    //@RequestParam means take date from the url after ?
     //DateTimeFormat says the format the date is written in so spring knows how to read it
+    // email is taken from the service through authenticate, not from the URL
     {
-        return service.getMealsForDay(userId, date);
+        String email = authentication.getName();
+        return service.getMealsForDay(date, email);
     }
     
 
     @PostMapping //this method answers POST
-    public UserFood addUserFood(@RequestBody UserFood food) 
+    public UserFood addUserFood(@RequestBody UserFood food, Authentication authentication) 
     //@reguestbody mean the data is in the body of the request converts json into userfood
     {
-        return service.addMeal(food);
+        String email = authentication.getName();
+        return service.addMeal(email, food);
     }
 
     @DeleteMapping("/{id}") // this method answers DELELTE
-    public void deleteUserFood(@PathVariable int id, @RequestParam int userId )
+    public void deleteUserFood(@PathVariable int id, Authentication authentication)
     //Pathvariable takes the number from the URL path
     {
-        service.deleteMeal(id, userId);
+        String email = authentication.getName();
+        service.deleteMeal(id, email);
     }
 
 }

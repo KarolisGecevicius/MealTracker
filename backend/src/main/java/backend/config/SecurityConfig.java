@@ -1,6 +1,7 @@
 package backend.config;
 
 import org.springframework.context.annotation.Bean;
+
 import java.util.Arrays;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 @Configuration // notifies that this class contains setup instruction and tells 
 // spring to read it when the app starts
@@ -27,16 +29,22 @@ public class SecurityConfig
     //SecurityFilterChain defines the security rules for incoming http requests
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
+        HttpStatusReturningLogoutSuccessHandler handler = new HttpStatusReturningLogoutSuccessHandler();
         http // starts configuring http security settings
             .cors(customizer -> customizer // turns on cors in spring security
                 .configurationSource(corsConfigurationSource()) // tells cors to get rules from 
                 //the corsConfigurationSource method
+            )
+            .logout(customizer -> customizer
+                .logoutSuccessHandler(handler)
+                .deleteCookies("JSESSIONID")        
             )
             .csrf(csrf -> csrf.disable()) // temporary for login to get working REMOVE LATER!!!
             .authorizeHttpRequests(auth -> auth // define which http requests users are allowed to access
                 .requestMatchers("/auth/login", "/register").permitAll() // allows everyone to access this endpoint
                 .anyRequest().authenticated() // for any other endpoints user is required to be authenticated
             );
+            
         return http.build(); // build takes all the configurations and creates a new securityFilterChain object
     }
 
